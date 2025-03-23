@@ -14,10 +14,30 @@
 // 
 
 package test_proj_1.simulations;
+import inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator;
+import inet.node.ethernet.Eth1G;
+import inet.node.inet.Router;
+import inet.node.inet.StandardHost;
 
-//
-// TODO auto-generated type
-//
+
 network Network
 {
+    @display("bgb=580,381");
+    submodules:
+        configurator: Ipv4NetworkConfigurator {
+            @display("p=106,66");
+        }
+        router: Router {
+            @display("p=290,184");
+        }
+        client: StandardHost {
+            @display("p=96,184");
+        }
+        server: StandardHost {
+            @display("p=492,184");
+        }
+    connections:
+        client.ethg++ <--> Eth1G <--> router.ethg++;
+        router.ethg++ <--> Eth1G <--> server.ethg++;
+
 }
